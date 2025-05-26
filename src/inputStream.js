@@ -1,4 +1,4 @@
-function InputStream(input) {
+export function inputStream(input) {
   let pos = 0, line = 1, col = 0;
   return {
     next: next,
@@ -15,7 +15,7 @@ function InputStream(input) {
     return input.charAt(pos)
   }
   function eof() {
-    return peek() == ""
+    return peek() == null
   }
   function die(msg) {
     throw new Error(msg + "(" + line + ":" + col + ")")
