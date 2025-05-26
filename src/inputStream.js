@@ -3,6 +3,7 @@ export function inputStream(input) {
   return {
     next: next,
     peek: peek,
+    comment_peek: comment_peek,
     eof:  eof,
     die:  die,
   }
@@ -13,6 +14,9 @@ export function inputStream(input) {
   }
   function peek() {
     return input.charAt(pos)
+  }
+  function comment_peek() {
+    return input.charAt(pos + 1)
   }
   function eof() {
     return peek() == null

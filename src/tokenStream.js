@@ -55,6 +55,7 @@ export function tokenStream(input) {
     let id = read_while(is_id)
     console.log("reading_ident")
     console.log(id)
+    // TODO
     // this isn't actually returning the keyword objects, do further testing
     return {
       type  : is_keyword(id) ? "kw" : "var",
@@ -91,7 +92,7 @@ export function tokenStream(input) {
     if (input.eof()) return null
     let ch = input.peek()
     if (ch == "-") {
-      let possible_comment = input.peek().peek()
+      let possible_comment = input.comment_peek()
       if (possible_comment == "-") {
         skip_comment()
         return read_next()
@@ -119,7 +120,7 @@ export function tokenStream(input) {
     return tok || read_next()
   }
   function eof() {
-    return peek() == null
+    return peek() == ""
   }
 }
 
