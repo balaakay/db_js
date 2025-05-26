@@ -1,0 +1,28 @@
+TODO:
+
+
+What can I do and what can I not do for RAM storage and Disk storage using JS?
+
+Do I need to start with the storage system? The database/table/record creation
+system? The SQL parser and query optimizer?
+  I think starting with the storage system is going to be the biggest difficulty
+  because of JS's inability to work directly with memory. If I can figure that out,
+  then I can probably finish the project.
+  * So node has a library called 'fs' that allows you to work with the filesystem
+    and there is also a way to work with memory using arrayBuffers and node.js 
+    buffers. So the storage system, although very difficult, is possible.
+
+  If I do not start there, I would probably start with the DB object creation or
+  the SQL parser. Most likely the SQL parser. I would like to learn how an AST
+  works and get a working parser. Getting a working parser in JS would be kind of
+  cool.
+    The parser has 3 parts:
+      the character input stream
+      the token input stream (lexer)
+      parser
+
+    This is good information when handling the 3 different tasks of the 'parser'
+
+  The query executor will have to be some sort of layer on top of the parser and
+  the storage system so that the right API's are called when a database is created
+  or when a row is selected.
