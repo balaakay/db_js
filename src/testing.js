@@ -11,5 +11,6 @@ let eof = tokenizer.eof()
 while (!eof) {
   console.log(tokenizer.next())
   eof = tokenizer.eof()
-  console.log(eof)
+  // console.log("eof value: ", eof)
 }
+

@@ -17,7 +17,7 @@ export function tokenStream(input) {
     return str
   }
   function is_keyword(x) {
-    console.log("is this a keyword? ", keywords.includes(x))
+    // console.log("is this a keyword? ", keywords.includes(x))
     return keywords.includes(x)
   }
   function is_digit(ch) {
@@ -29,6 +29,8 @@ export function tokenStream(input) {
   function is_id(ch) {
     return is_id_start(ch) || "!?-<>=0123456789".indexOf(ch) >= 0
   }
+  // I also need to make some sort of specific exception for the * operator since
+  // it means select all in SQL
   function is_op_char(ch) {
     return "!%^*+-=&<>|".indexOf(ch) >= 0
   }
@@ -53,14 +55,13 @@ export function tokenStream(input) {
   }
   function read_ident() {
     let id = read_while(is_id)
-    console.log("reading_ident")
-    console.log(id)
-    // TODO
-    // this isn't actually returning the keyword objects, do further testing
-    return {
+    // console.log("reading_ident")
+    // console.log(id)
+    current =  {
       type  : is_keyword(id) ? "kw" : "var",
       value : id
     }
+    return current
   }
   function read_escaped(end) {
     let escaped = false, str = ""
@@ -120,7 +121,8 @@ export function tokenStream(input) {
     return tok || read_next()
   }
   function eof() {
-    return peek() == ""
+    console.log("peek's value: ", peek())
+    return peek() == null
   }
 }
 
