@@ -17,7 +17,6 @@ export function tokenStream(input) {
     return str
   }
   function is_keyword(x) {
-    // console.log("is this a keyword? ", keywords.includes(x))
     return keywords.includes(x)
   }
   function is_digit(ch) {
@@ -55,13 +54,10 @@ export function tokenStream(input) {
   }
   function read_ident() {
     let id = read_while(is_id)
-    // console.log("reading_ident")
-    // console.log(id)
-    current =  {
+    return {
       type  : is_keyword(id) ? "kw" : "var",
       value : id
     }
-    return current
   }
   function read_escaped(end) {
     let escaped = false, str = ""
@@ -113,7 +109,7 @@ export function tokenStream(input) {
     input.die("Can't handle character: " + ch)
   }
   function peek() {
-    return current || (current + read_next())
+    return current || (current = read_next())
   }
   function next() {
     let tok = current
@@ -121,7 +117,6 @@ export function tokenStream(input) {
     return tok || read_next()
   }
   function eof() {
-    console.log("peek's value: ", peek())
     return peek() == null
   }
 }
